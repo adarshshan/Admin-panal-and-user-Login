@@ -1,0 +1,9 @@
+body{
+    background: url('assets/hala1.jpg');
+    background-position: center;
+    background-size: cover;
+}
+.navbar{
+    position: fixed;
+    top: 0;
+}

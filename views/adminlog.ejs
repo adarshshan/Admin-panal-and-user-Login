@@ -1,0 +1,27 @@
+<%-include('header')-%>
+    <section>
+        <div class="center-div text-center">
+            <div class="container w-25 border rounded bg-light py-5 mt-5">
+                <div class="text-center fs-3 text-primary">
+                    <h1>Admin Login</h1>
+                </div>
+                <div class="text-center border-bottom border-primary pb-2">
+                    <small>Enter your Username and password</small>
+                </div>
+                <form action="/route/logi" method="post" id="">
+                    <div class="form-group mt-3">
+                        <input class="border border-primary px-3 py-2 rounded" autocomplete="off" type="text"
+                            name="name" placeholder="Enter your Username">
+                    </div>
+                    <div class="form-group mt-3 border-bottom border-primary">
+                        <input class="border border-primary px-3 py-2 rounded mb-3" autocomplete="off" type="password"
+                            name="password" placeholder="Enter your Password"><br>
+                    </div>
+                    <input type="submit" class="btn btn-primary rounded-pill px-5 mt-3 mb-2 fs-5" value="Log In">
+                    
+                </form>
+
+            </div>
+        </div>
+    </section>
+    <%-include('footer')-%>
