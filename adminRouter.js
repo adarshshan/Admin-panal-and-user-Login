@@ -11,7 +11,7 @@ adminRouter.get('/admin', (req, res) => {
     if (req.session.logined) {
         res.redirect('/route/home')
     } else {
-        res.render('adminlog',{title:"admin Login"})
+        res.render('adminlog', { title: "admin Login" })
     }
 
 })
@@ -20,7 +20,7 @@ adminRouter.post('/logi', (req, res) => {
     if (credential.username == req.body.name && credential.password == req.body.password) {
         req.session.user = req.body.name
         req.session.logined = true
-        req.session.logi=true
+        req.session.logi = true
         res.redirect('/route/home')
         console.log(req.session)
     } else {
@@ -48,7 +48,7 @@ adminRouter.get('/add', (req, res) => {
 
 
 adminRouter.post('/add', async (req, res) => {
-    if(req.session.logi){
+    if (req.session.logi) {
         const data = {
             name: req.body.name,
             email: req.body.email,
@@ -58,7 +58,7 @@ adminRouter.post('/add', async (req, res) => {
         console.log(req.body.name)
         await collection.insertMany([data])
         res.redirect('/route/home')
-    }else{
+    } else {
         res.redirect('/route/admin')
     }
 })
@@ -113,26 +113,33 @@ adminRouter.get('/delete/:id', (req, res) => {
     collection.findByIdAndRemove(id, (err, result) => {
         if (err) {
             res.send(err)
-        } else { 
+        } else {
             res.redirect('/route/home')
         }
     })
 })
 
-adminRouter.post('/search',async (req, res) => {
+adminRouter.get('/search/:result', async (req, res) => {
     try {
-        let searchTerm = req.body.searchTerm
-        var emai = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/
-        let searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
-        let searchemail = searchTerm.replace(emai)
+        console.log('its here')
+        // let searchTerm = req.body.searchTerm
+        const result=req.params.result;
+        // let searchNoSpecialChar = searchTerm.replace(/[^a-zA-Z0-9]/g, "");
+        let searchNoSpecialChar = result.replace(/[^a-zA-Z0-9]/g, "");
 
-        const person=await collection.find({
-            $or:[
-                {name:{$regex:new RegExp(searchNoSpecialChar,"i")}},
-                {email:{$regex:new RegExp(searchemail,"i")}},
-            ]
+        // const person = await collection.find({
+        //     $or: [
+        //         { name: { $regex: new RegExp(searchNoSpecialChar, "i") } },
+        //         { email: { $regex: new RegExp(searchemail, "i") } },
+        //     ]
+        // })
+        const person = await collection.find({
+            $or: [
+                { name: { $regex: new RegExp(searchNoSpecialChar, "i") } }]
         })
-        res.render('search',{person,title:'search results'})
+        // res.render('search', { person, title: 'search results' })
+        console.log(`person is ${person}`);
+        res.json({success:true,person});
 
     } catch (error) {
         console.log(err)

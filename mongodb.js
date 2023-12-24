@@ -4,7 +4,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/work2')
     console.log('Mongodb is connected...')
 })
 .catch(()=>{
-    console.log("Failed to connect with mongodb...")
+    console.log("Failed to connect with mongodb...") 
 })
 
 const LogInSchema=new mongoose.Schema({

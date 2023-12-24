@@ -7,3 +7,12 @@ body{
     position: fixed;
     top: 0;
 }
+.dropdow{
+    position: absolute;
+    top: 70px;
+    left: 500px;
+    width: 600px;
+    background: rgb(206, 206, 204);
+    display: none;
+    color: black;
+}
