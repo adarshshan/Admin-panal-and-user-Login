@@ -10,4 +10,5 @@ router.get('/dashboard', controller.dashboardPage);
 router.get('/logout',controller.logOut);
 
 
+
 module.exports = router
