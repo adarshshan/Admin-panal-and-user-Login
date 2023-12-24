@@ -1,33 +1,15 @@
 const express = require('express')
 const adminRouter = express.Router()
 const collection = require('./mongodb')
+const controller=require('./controller/adminController')
 
 const credential = {
     username: 'Adarsh',
     password: 'adarsh'
 }
 
-adminRouter.get('/admin', (req, res) => {
-    if (req.session.logined) {
-        res.redirect('/route/home')
-    } else {
-        res.render('adminlog',{title:"admin Login"})
-    }
-
-})
-
-adminRouter.post('/logi', (req, res) => {
-    if (credential.username == req.body.name && credential.password == req.body.password) {
-        req.session.user = req.body.name
-        req.session.logined = true
-        req.session.logi=true
-        res.redirect('/route/home')
-        console.log(req.session)
-    } else {
-        res.redirect('/route/admin')
-    }
-
-})
+adminRouter.get('/admin',controller.adminLoginPage);
+adminRouter.post('/logi',controller.adminLoginPost);
 
 adminRouter.get('/home', async (req, res) => {
     if (req.session.user) {
